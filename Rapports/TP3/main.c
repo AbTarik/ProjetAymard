@@ -3,7 +3,7 @@
 
 
 int main() {
-    printf("This is a first program ! \n")
+    printf("This is a first program ! \n");
 
     return 0;
 }
