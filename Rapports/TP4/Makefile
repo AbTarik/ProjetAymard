@@ -1,19 +1,27 @@
 CC = gcc
 CFLAGS = -Wno-implicit-function-declaration
 EXEC = main
+SRC= $(wildcard *.c)
+OBJ= $(SRC:.c=.o)
 
 all: $(EXEC)
-	@chmod +x $(EXEC)
-	@./$(EXEC)
+	@chmod +x $<
+	@./$<
 
-$(EXEC): main.o functions.o
-	@$(CC) $(CFLAGS) main.o functions.o -o $(EXEC)
+$(EXEC): $(OBJ)
+	@$(CC) $(CFLAGS) $^ -o $@
 
 main.o: main.c
-	@$(CC) $(CFLAGS) -c main.c -o main.o
 
-functions.o: functions.h functions.c
-	@$(CC) $(CFLAGS) -c functions.c -o functions.o
+functions.o: functions.c
 
-clean: $(EXEC)
-	@rm -f $(EXEC) *.o
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+.PHONY : clean mrproper
+
+clean:
+	@rm -rf *.o
+
+mrproper: clean
+	@rm -rf $(EXEC)

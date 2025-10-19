@@ -1,6 +1,8 @@
 #ifndef HEADER_FILE
 #define HEADER_FILE
 
+// vhhh A comment like this
+
 int add(int a, int b);
 
 int sub(int a, int b);
